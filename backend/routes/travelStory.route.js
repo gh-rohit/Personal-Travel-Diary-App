@@ -7,6 +7,7 @@ import {
   editTravelStory,
   getAllTravelStory,
   imageUpload,
+  updateIsFavourite,
 } from "../controllers/travelStory.controller.js"
 import upload from "../multer.js"
 
@@ -23,5 +24,7 @@ router.get("/get-all", verifyToken, getAllTravelStory)
 router.post("/edit-story/:id", verifyToken, editTravelStory)
 
 router.delete("/delete-story/:id", verifyToken, deleteTravelStory)
+
+router.put("/update-is-favourite/:id", verifyToken, updateIsFavourite)
 
 export default router

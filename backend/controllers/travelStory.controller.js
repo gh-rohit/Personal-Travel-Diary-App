@@ -174,3 +174,27 @@ export const deleteTravelStory = async (req, res, next) => {
     next(error)
   }
 }
+
+export const updateIsFavourite = async (req, res, next) => {
+  const { id } = req.params
+  const { isFavorite } = req.body
+  const userId = req.user.id
+
+  try {
+    const travelStory = await TravelStory.findOne({ _id: id, userId: userId })
+
+    if (!travelStory) {
+      return next(errorHandler(404, "Travel story not found!"))
+    }
+
+    travelStory.isFavorite = isFavorite
+
+    await travelStory.save()
+
+    res
+      .status(200)
+      .json({ story: travelStory, message: "Updated successfully!" })
+  } catch (error) {
+    next(error)
+  }
+}
