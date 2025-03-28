@@ -5,6 +5,7 @@ import {
   deleteImage,
   deleteTravelStory,
   editTravelStory,
+  filterTravelStories,
   getAllTravelStory,
   imageUpload,
   searchTravelStory,
@@ -29,5 +30,7 @@ router.delete("/delete-story/:id", verifyToken, deleteTravelStory)
 router.put("/update-is-favourite/:id", verifyToken, updateIsFavourite)
 
 router.get("/search", verifyToken, searchTravelStory)
+
+router.get("/filter", verifyToken, filterTravelStories)
 
 export default router
