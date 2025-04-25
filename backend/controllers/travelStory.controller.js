@@ -107,7 +107,7 @@ export const editTravelStory = async (req, res, next) => {
   const userId = req.user.id
 
   // validate required field
-  if (!title || !story || !visitedLocation || !imageUrl || !visitedDate) {
+  if (!title || !story || !visitedLocation || !visitedDate) {
     return next(errorHandler(400, "All fields are required"))
   }
 
