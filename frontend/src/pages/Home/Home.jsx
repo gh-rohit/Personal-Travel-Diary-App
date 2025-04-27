@@ -11,6 +11,7 @@ import EmptyCard from "../../components/EmptyCard"
 import { DayPicker } from "react-day-picker"
 import moment from "moment"
 import FilterInfoTitle from "../../components/FilterInfoTitle"
+import { getEmptyCardMessage } from "../../utils/helper"
 
 const Home = () => {
   const [allStories, setAllStories] = useState([])
@@ -203,7 +204,7 @@ const Home = () => {
                 imgSrc={
                   "https://images.pexels.com/photos/5706021/pexels-photo-5706021.jpeg?auto=compress&cs=tinysrgb&w=600"
                 }
-                message={`Start creating your first travel story! Click the 'Add' button to write down your thoughts, ideas and memories. Let's get started!`}
+                message={getEmptyCardMessage(filterType)}
                 setOpenAddEditModal={() =>
                   setOpenAddEditModal({
                     isShown: true,
