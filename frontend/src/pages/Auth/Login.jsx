@@ -1,10 +1,14 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import PasswordInput from "../../components/PasswordInput"
 import { useNavigate } from "react-router-dom"
 import axiosInstance from "../../utils/axiosInstance"
 import { validateEmail } from "../../utils/helper"
 import { useDispatch, useSelector } from "react-redux"
-import { signInStart, signInSuccess } from "../../redux/slice/userSlice"
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../../redux/slice/userSlice"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -14,7 +18,7 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
 
-  const { loading } = useSelector((state) => state.user)
+  const { loading, currentUser } = useSelector((state) => state.user)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -43,8 +47,12 @@ const Login = () => {
       if (response.data) {
         dispatch(signInSuccess(response.data))
         navigate("/")
+      } else {
+        dispatch(signInFailure("An unexpected error occurred!"))
       }
     } catch (error) {
+      dispatch(signInFailure("An unexpected error occurred!"))
+
       if (
         error.response &&
         error.response.data &&
@@ -56,6 +64,12 @@ const Login = () => {
       }
     }
   }
+
+  useEffect(() => {
+    if (!loading && currentUser) {
+      navigate("/")
+    }
+  }, [currentUser])
 
   return (
     <div className="h-screen bg-cyan-50 overflow-hidden relative">

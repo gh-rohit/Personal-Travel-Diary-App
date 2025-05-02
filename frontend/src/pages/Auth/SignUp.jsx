@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import PasswordInput from "../../components/PasswordInput"
 import { useNavigate } from "react-router-dom"
 import axiosInstance from "../../utils/axiosInstance"
@@ -14,7 +14,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
 
-  const { loading } = useSelector((state) => state.user)
+  const { loading, currentUser } = useSelector((state) => state.user)
 
   const handleSignUp = async (e) => {
     e.preventDefault()
@@ -60,6 +60,12 @@ const SignUp = () => {
       }
     }
   }
+
+  useEffect(() => {
+    if (!loading && currentUser) {
+      navigate("/")
+    }
+  }, [currentUser])
 
   return (
     <div className="h-screen bg-cyan-50 overflow-hidden relative">
