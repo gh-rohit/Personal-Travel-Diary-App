@@ -22,6 +22,7 @@ mongoose
   })
 
 const app = express()
+const port = process.env.PORT || 3000
 
 // Enable CORS for frontend (Replace with your frontend URL)
 app.use(
@@ -37,8 +38,8 @@ app.use(cookieParser())
 // for allowing json object in req body
 app.use(express.json())
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000!")
+  app.listen(port, () => {
+  console.log(`Server is running on port ${port}!`)
 })
 
 app.use("/api/auth", authRoutes)
