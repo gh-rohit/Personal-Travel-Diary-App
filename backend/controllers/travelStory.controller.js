@@ -58,7 +58,8 @@ export const imageUpload = async (req, res, next) => {
       return next(errorHandler(400, "No image uploaded"))
     }
 
-    const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`
+   const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
+
 
     res.status(201).json({ imageUrl })
   } catch (error) {
@@ -121,7 +122,8 @@ export const editTravelStory = async (req, res, next) => {
       next(errorHandler(404, "Travel Story not found!"))
     }
 
-    const placeholderImageUrl = `http://localhost:3000/assets/placeholderImage.png`
+   const placeholderImageUrl = `${req.protocol}://${req.get("host")}/assets/placeholderImage.png`
+
 
     travelStory.title = title
     travelStory.story = story
