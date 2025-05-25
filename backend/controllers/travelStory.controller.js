@@ -157,7 +157,7 @@ export const deleteTravelStory = async (req, res, next) => {
     await travelStory.deleteOne({ _id: id, userId: userId })
 
     // Check if the image is not a placeholder before deleting
-    const placeholderImageUrl = `http://localhost:3000/assets/placeholderImage.png`
+    const placeholderImageUrl = `${req.protocol}://${req.get("host")}/assets/placeholderImage.png`
 
     // Extract the filename from the imageUrl
     const imageUrl = travelStory.imageUrl
